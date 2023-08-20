@@ -1,0 +1,30 @@
+<!-- -*- mode: XML -*- -->
+<launch>
+
+   <master auto="start"/>
+ <!-- Run the map server --> 
+    <arg name="map" default="$(find mushr_2dnav)/maps/whole_esc_map2.yaml" />
+    <node pkg="map_server" name="map_server" type="map_server" args="$(arg map)" />
+
+ <!--- Run AMCL --> 
+    <!--- add cmdvel_to_ackermann in launch file --> 
+    <node pkg="mushr_2dnav" type="cmdvel_to_ackermann.py" name="cmdvel_to_ackermann" />
+
+    <!--- <include file="$(find amcl)/examples/amcl_omni.launch" /> --> 
+   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    
+    <param name="controller_frequency" value="3" />
+    <param name="controller_patiente" value="15" />
+    <param name="tramsform_tolerance" value="0.3" />
+
+    <rosparam file="$(find mushr_2dnav)/configs/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
+    <rosparam file="$(find mushr_2dnav)/configs/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find mushr_2dnav)/configs/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find mushr_2dnav)/configs/global_costmap_params.yaml" command="load" /> 
+    <rosparam file="$(find mushr_2dnav)/configs/base_local_planner_params.yaml" command="load" />
+   </node>
+
+
+   <node pkg="amcl" type="amcl" name="amcl" />
+
+</launch>
