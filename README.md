@@ -1,4 +1,4 @@
-# IRP5-Search-and-Rescue-Robot
+# IRP5 Search and Rescue Robot
 
 Search and Rescue (SAR) refers to the vital process of locating and aiding individuals in perilous situations such as natural disasters. After such incidents, SAR teams aim to swiftly locate and assist survivors who are often in hazardous conditions. This process often possesses a certain amount of risk, however by leveraging robotics, SAR teams can navigate difficult-to-reach areas and save survivors more effectively without risking human lives.
 
